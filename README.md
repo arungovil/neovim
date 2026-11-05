@@ -1,11 +1,11 @@
 <h3 align="center">
-Neovim dotfiles ⚡</h3>
+Neovim config ⚡</h3>
 
 ---
 
 ### What's this?
 
-My personal Neovim config — minimal, fast, and opinionated. Uses lazy.nvim for plugin management with LSP, Telescope, Treesitter, and formatting out of the box.
+My personal Neovim config — minimal, fast, and opinionated. Uses lazy.nvim for plugin management with LSP, snacks.nvim, Treesitter, and formatting out of the box.
 
 ### How to install?
 

@@ -2,7 +2,6 @@ local options = { silent = true, noremap = true }
 
 vim.cmd("autocmd TermOpen * setlocal nonumber norelativenumber | setlocal nowrap")
 
-vim.keymap.set("n", "<leader>d", ":NvimTreeFindFile<CR>") -- Open Nvim Tree with current buffer
 vim.keymap.set("n", "<leader>y", '"+y') -- Yank to Clipboard
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+Y')
@@ -22,12 +21,18 @@ vim.keymap.set("n", "<leader><Tab>", "<C-w>l", { noremap = true }) -- Move to ri
 vim.keymap.set("n", "<leader>k", "<C-w>k", { noremap = true }) -- Move to top pane
 vim.keymap.set("n", "<leader>\\", "<C-w>h", { noremap = true }) -- Move to left pane
 vim.keymap.set("n", "<leader>j", "<C-w>j", { noremap = true }) -- Move to bottom pane
-vim.keymap.set("n", "<leader>f", [[<cmd>Telescope find_files<cr>]], { noremap = true, silent = true }) -- Find files
-vim.keymap.set("n", "<leader>g", [[<cmd>Telescope live_grep<cr>]], { noremap = true, silent = true }) -- Live grep
-vim.keymap.set("n", "<leader>b", [[<cmd>Telescope buffers<cr>]], { noremap = true, silent = true }) -- Find buffers
+vim.keymap.set("n", "<leader>f", function()
+	Snacks.picker.files()
+end, { silent = true }) -- Find files
+vim.keymap.set("n", "<leader>g", function()
+	Snacks.picker.grep()
+end, { silent = true }) -- Live grep
+vim.keymap.set("n", "<leader>b", function()
+	Snacks.picker.buffers()
+end, { silent = true }) -- Find buffers
 vim.keymap.set("n", "<leader>v", "<C-v>", { noremap = true }) -- Select line mode for comments
 vim.keymap.set("n", "<leader>p", ":Neogit kind=vsplit<CR>", options) -- Open git
-vim.keymap.set("n", "<leader>`", ":bufdo bd | :Explore<CR>", options) -- Reload project
+vim.keymap.set("n", "<leader>`", ":bufdo bd | :Oil<CR>", options) -- Reload project
 vim.keymap.set("n", "<leader>l", ":bprevious<CR>", options) -- Go to previous buffer
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", options) -- Escape terminal
 vim.keymap.set("n", "<leader>m", ":close<CR>", options) -- Minimize terminal

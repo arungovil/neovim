@@ -1,3 +1,4 @@
+vim.loader.enable()
 vim.g.netrw_banner = 0
 
 require("plugins")
