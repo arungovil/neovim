@@ -142,19 +142,29 @@ require("lazy").setup({
 		},
 	},
 
+	-- Sidebar file tree
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		cmd = "Neotree",
+		dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
+		keys = {
+			{ "<leader>d", "<cmd>Neotree toggle reveal position=right<cr>", desc = "File tree (sidebar)" },
+		},
+		opts = {
+			filesystem = {
+				filtered_items = { visible = true },
+				follow_current_file = { enabled = true },
+				hijack_netrw_behavior = "disabled", -- leave directory buffers to oil
+			},
+			window = { width = 40 },
+		},
+	},
+
 	-- File explorer (edit the filesystem like a buffer)
 	{
 		"stevearc/oil.nvim",
 		cmd = "Oil",
-		keys = {
-			{
-				"<leader>d",
-				function()
-					require("oil").open_float()
-				end,
-				desc = "Oil (current file's directory)",
-			},
-		},
 		opts = {
 			default_file_explorer = true,
 			columns = {},
