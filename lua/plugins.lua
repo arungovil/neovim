@@ -142,14 +142,14 @@ require("lazy").setup({
 		},
 	},
 
-	-- Sidebar file tree
+	-- Modal file tree (floating picker-style window)
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
 		cmd = "Neotree",
 		dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
 		keys = {
-			{ "<leader>d", "<cmd>Neotree toggle reveal position=right<cr>", desc = "File tree (sidebar)" },
+			{ "<leader>d", "<cmd>Neotree toggle reveal position=float<cr>", desc = "File tree (modal)" },
 		},
 		opts = {
 			filesystem = {
@@ -157,7 +157,14 @@ require("lazy").setup({
 				follow_current_file = { enabled = true },
 				hijack_netrw_behavior = "disabled", -- leave directory buffers to oil
 			},
-			window = { width = 40 },
+			window = {
+				position = "float",
+				width = 40,
+				popup = {
+					size = { height = "80%", width = "60%" },
+					position = "50%",
+				},
+			},
 		},
 	},
 
