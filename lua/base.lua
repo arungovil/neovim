@@ -61,6 +61,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.hl.on_yank()
 	end,
 })
-
--- Claude Code's fullscreen renderer uses the alternate screen, which has no scrollback in :terminal
-vim.env.CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN = "1"

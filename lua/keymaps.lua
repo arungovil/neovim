@@ -39,10 +39,14 @@ vim.keymap.set("n", "<leader>m", ":close<CR>", options) -- Minimize terminal
 vim.keymap.set("n", "<leader><CR>", "gf", options) -- Go to file
 vim.keymap.set("n", "<leader>=", "<cmd>Gitsigns blame_line<CR>", { noremap = true, silent = true }) -- Blame current line
 vim.keymap.set("n", "<leader>t", function()
-	vim.cmd("botright vsplit")
-	vim.cmd("terminal zsh")
-	vim.cmd("startinsert")
-end, { noremap = true }) -- Split open terminal
+	Snacks.terminal.toggle(nil, {
+		auto_insert = false,
+		win = {
+			position = "right",
+			width = 0.4,
+		},
+	})
+end, { desc = "Toggle terminal" })
 vim.keymap.set("n", "<leader>/", "gcc", { remap = true }) -- Toggle comment
 vim.keymap.set("v", "<leader>/", "gc", { remap = true }) -- Toggle comment (visual)
 vim.keymap.set("n", "<leader>o", "<cmd>Octo pr list<CR>", options) -- List PRs
@@ -51,8 +55,6 @@ vim.keymap.set("n", "<leader>Os", "<cmd>Octo review submit<CR>", options) -- Sub
 vim.keymap.set("n", "<leader>Oc", "<cmd>Octo review close<CR>", options) -- Close review
 vim.keymap.set("n", "<leader>Oa", "<cmd>Octo comment add<CR>", options) -- Add review comment
 vim.keymap.set("n", "<leader>Oq", "<cmd>bd<CR>", options) -- Close PR buffer
-vim.keymap.set("n", "<leader>h", "<cmd>ClaudeCodeContinue<CR>") -- Claude code (continue)
-vim.keymap.set("n", "<leader>H", "<cmd>ClaudeCode<CR>") -- Claude code (new)
 local function open_pi_terminal(cmd)
 	local split_ratio = 0.5
 	vim.cmd("botright vsplit")
@@ -70,9 +72,9 @@ local function open_pi_terminal(cmd)
 end
 
 vim.keymap.set("n", "<leader>i", function()
-	open_pi_terminal("pi -r")
+	open_pi_terminal("pi --tui-mode regular -r")
 end, { desc = "Open pi (browse or continue last session)" })
 
 vim.keymap.set("n", "<leader>I", function()
-	open_pi_terminal("pi")
+	open_pi_terminal("pi --tui-mode regular")
 end, { desc = "Open pi (new session)" })

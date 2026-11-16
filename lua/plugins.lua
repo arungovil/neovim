@@ -174,22 +174,6 @@ require("lazy").setup({
 		},
 	},
 
-	-- AI assistant
-	{
-		"greggh/claude-code.nvim",
-		cmd = { "ClaudeCode", "ClaudeCodeContinue" },
-		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {
-			window = {
-				split_ratio = 0.3,
-				position = "vertical",
-				enter_insert = true,
-				hide_numbers = true,
-				hide_signcolumn = true,
-			},
-		},
-	},
-
 	-- Formatting
 	{
 		"stevearc/conform.nvim",
