@@ -21,4 +21,14 @@ nvim
 Lazy.nvim will auto-install all plugins on first launch. Mason will set up language servers and formatters.
 
 > **Note**
-> Requires Neovim >= 0.10 and git. Some formatters (like prettierd) need to be installed separately.
+> Requires Neovim >= 0.10 and git. Project formatters must be installed separately.
+
+### Formatting
+
+JS and TS files use the nearest Oxfmt, Biome or Prettier config (in that order
+for ties). CSS, HTML, JSON and Markdown use Prettier when configured. Install the
+selected formatter locally or on PATH. Without a matching config, formatting uses
+an available LSP; a missing configured formatter won't fall back.
+
+Format on save or with `<leader>F`. Use `:ConformInfo` to check the selected
+formatter and its availability.

@@ -190,22 +190,28 @@ require("lazy").setup({
 			{
 				"<leader>F",
 				function()
-					require("conform").format({ lsp_format = "fallback", timeout_ms = 1000 })
+					require("conform").format({ timeout_ms = 1000 })
 				end,
 				mode = { "n", "v" },
 				desc = "Format file or range",
 			},
 		},
 		opts = {
+			default_format_opts = { lsp_format = "fallback" },
+			formatters = {
+				oxfmt = { cwd = require("format").cwd },
+				biome = { cwd = require("format").cwd },
+				prettier = { cwd = require("format").cwd },
+			},
 			formatters_by_ft = {
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				javascriptreact = { "prettier" },
-				typescriptreact = { "prettier" },
-				css = { "prettier" },
-				html = { "prettier" },
-				json = { "prettier" },
-				markdown = { "prettier" },
+				javascript = require("format").formatters,
+				typescript = require("format").formatters,
+				javascriptreact = require("format").formatters,
+				typescriptreact = require("format").formatters,
+				css = require("format").prettier_formatters,
+				html = require("format").prettier_formatters,
+				json = require("format").prettier_formatters,
+				markdown = require("format").prettier_formatters,
 				yaml = { "yamlfmt" },
 				lua = { "stylua" },
 				python = { "ruff_format" },
@@ -213,7 +219,7 @@ require("lazy").setup({
 				cpp = { "clang-format" },
 			},
 			-- go (gopls) and clojure (clojure-lsp) format through the LSP fallback
-			format_on_save = { lsp_format = "fallback", timeout_ms = 1000 },
+			format_on_save = { timeout_ms = 1000 },
 		},
 	},
 
@@ -300,7 +306,6 @@ require("lazy").setup({
 					"basedpyright",
 					"ruff",
 					"lua-language-server",
-					"prettier",
 					"stylua",
 					"clang-format",
 					"yamlfmt",
