@@ -16,7 +16,7 @@ o.pumblend = 5
 o.pumheight = 10
 o.fillchars = { eob = " ", diff = "╱" }
 o.showcmd = true
-o.shell = "/bin/zsh"
+o.shell = require("platform").shell
 
 -- Indent
 o.expandtab = true

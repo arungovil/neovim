@@ -1,4 +1,5 @@
 local options = { silent = true, noremap = true }
+local platform = require("platform")
 
 vim.cmd("autocmd TermOpen * setlocal nonumber norelativenumber | setlocal nowrap")
 
@@ -55,11 +56,16 @@ vim.keymap.set("n", "<leader>Os", "<cmd>Octo review submit<CR>", options) -- Sub
 vim.keymap.set("n", "<leader>Oc", "<cmd>Octo review close<CR>", options) -- Close review
 vim.keymap.set("n", "<leader>Oa", "<cmd>Octo comment add<CR>", options) -- Add review comment
 vim.keymap.set("n", "<leader>Oq", "<cmd>bd<CR>", options) -- Close PR buffer
-local function open_pi_terminal(cmd)
+local function open_pi_terminal(args)
+	local pi = platform.executable("pi")
+	if pi == "" then
+		vim.notify("pi not found on PATH", vim.log.levels.ERROR)
+		return
+	end
 	local split_ratio = 0.5
 	vim.cmd("botright vsplit")
 	vim.cmd("vertical resize " .. math.floor(vim.o.columns * split_ratio))
-	vim.cmd("terminal " .. cmd)
+	vim.cmd("terminal " .. vim.fn.shellescape(pi) .. " " .. args)
 	local buf = vim.api.nvim_get_current_buf()
 	vim.bo[buf].bufhidden = "hide"
 	vim.bo[buf].buflisted = false
@@ -72,9 +78,9 @@ local function open_pi_terminal(cmd)
 end
 
 vim.keymap.set("n", "<leader>i", function()
-	open_pi_terminal("pi --tui-mode regular -r")
+	open_pi_terminal("--tui-mode regular -r")
 end, { desc = "Open pi (browse or continue last session)" })
 
 vim.keymap.set("n", "<leader>I", function()
-	open_pi_terminal("pi --tui-mode regular")
+	open_pi_terminal("--tui-mode regular")
 end, { desc = "Open pi (new session)" })
