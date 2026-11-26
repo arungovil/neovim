@@ -30,6 +30,7 @@ require("lazy").setup({
 		config = function(_, opts)
 			require("cendre").setup(opts)
 			vim.cmd.colorscheme("cendre")
+			vim.api.nvim_set_hl(0, "MatchParen", { fg = "#1b1b1b", bg = "#e5c07b", bold = true })
 		end,
 	},
 
